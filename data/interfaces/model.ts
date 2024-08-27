@@ -5,11 +5,10 @@ export namespace Interfaces {
     type?: number;
     username?: string;
     email?: string;
-    fullName?: string;
     password?: string;
     profileImage?: string;
+    displayName?: string;
     createdAt?: Date;
-    updatedAt?: Date;
   }
 
   export interface IAdmin extends IAccount {}
@@ -19,5 +18,6 @@ export namespace Interfaces {
     dob?: Date;
     address?: string;
     gender?: number;
+    fullName?: string;
   }
 }

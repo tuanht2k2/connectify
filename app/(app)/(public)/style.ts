@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   errorText: {
-    color: "#cc0808",
+    color: "#ad0202",
     fontSize: 15,
   },
   button: {

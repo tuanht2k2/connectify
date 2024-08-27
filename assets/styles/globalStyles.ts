@@ -33,6 +33,21 @@ const GlobalStyle = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+
+  horizontalButtonGroup: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "row",
+    gap: 20,
+  },
+
+  // border radius
+  xsBorderRadius: { borderRadius: 5 },
+  smBorderRadius: { borderRadius: 15 },
+  mdBorderRadius: { borderRadius: 25 },
+  lgBorderRadius: { borderRadius: 35 },
+  circleBorderRadius: { borderRadius: 50 },
 });
 
 export default GlobalStyle;

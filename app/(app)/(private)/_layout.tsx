@@ -54,6 +54,7 @@ export default function TabLayout() {
 
   const dispatch = useDispatch();
   const handleLogout = () => {
+    toggleDialog();
     router.push("/login");
     dispatch(logout());
   };
@@ -95,18 +96,10 @@ export default function TabLayout() {
             </View>
             <Dialog isVisible={isDialogVisible} onBackdropPress={toggleDialog}>
               <View>
-                <Text style={styles.dialogWrapper}>
+                <Text style={styles.dialogHeader}>
                   Bạn có muốn đăng xuất không?
                 </Text>
                 <View style={styles.dialogButtonWrapper}>
-                  <Button
-                    title="Có"
-                    color={"secondary"}
-                    buttonStyle={{
-                      borderRadius: 8,
-                    }}
-                    onPress={handleLogout}
-                  ></Button>
                   <Button
                     title="Không"
                     color={"primary"}
@@ -114,6 +107,15 @@ export default function TabLayout() {
                       borderRadius: 8,
                     }}
                     onPress={toggleDialog}
+                  ></Button>
+                  <Button
+                    title="Có"
+                    color={"secondary"}
+                    buttonStyle={{
+                      borderRadius: 8,
+                      minWidth: 70,
+                    }}
+                    onPress={handleLogout}
                   ></Button>
                 </View>
               </View>
@@ -198,9 +200,10 @@ const styles = StyleSheet.create({
     height: 60,
     backgroundColor: "#fff",
   },
-  dialogWrapper: {
+  dialogHeader: {
     width: "100%",
     textAlign: "center",
+    fontSize: 16,
   },
   dialogButtonWrapper: {
     display: "flex",

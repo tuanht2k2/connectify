@@ -15,6 +15,7 @@ import { login } from "@/redux/reducers/authSlice";
 import { Controller, useForm } from "react-hook-form";
 import { Interfaces } from "@/data/interfaces/model";
 import { useState } from "react";
+import { Link } from "expo-router";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ export default function LoginScreen() {
 
     setTimeout(() => {
       if (data.username === "tuanht" && data.password === "111111")
-        dispatch(login({ fullName: "Dinh cong tuan", id: "user1" }));
+        dispatch(login({ displayName: "Dinh cong tuan", id: "user1" }));
       else {
         setLoggingIn(false);
         setError("username", {
@@ -132,9 +133,9 @@ export default function LoginScreen() {
         <TouchableOpacity>
           <Text style={styles.linkText}>Quên mật khẩu?</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <Link href={"/register"}>
           <Text style={styles.linkText}>Đăng ký</Text>
-        </TouchableOpacity>
+        </Link>
       </View>
     </ImageBackground>
   );

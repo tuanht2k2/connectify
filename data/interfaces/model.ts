@@ -46,8 +46,12 @@ export namespace Interfaces {
   }
 
   export interface IWebRTC {
+    roomId?: string;
+    createdBy?: string;
     type?: "offer" | "answer" | "candidate";
     sdp?: string;
     candidate?: string;
+    sdpMid?: string;
+    sdpMLineIndex?: number;
   }
 }

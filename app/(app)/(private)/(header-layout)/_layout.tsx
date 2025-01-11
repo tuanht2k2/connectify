@@ -58,6 +58,14 @@ export default function HeaderLayout() {
           headerTitleStyle: styles.headerText,
         }}
       />
+      <Stack.Screen
+        name="room/[roomId]"
+        options={{
+          headerTitle: "Gọi Video",
+          headerStyle: styles.header,
+          headerTitleStyle: styles.headerText,
+        }}
+      />
     </Stack>
   );
 }

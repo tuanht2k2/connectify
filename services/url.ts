@@ -3,6 +3,8 @@ export enum AUTH_URL {
   REGISTER = "/auth/register",
   LOG_OUT = "/auth/log-out",
   CHECK_VALID_REGISTER_INFO = "/auth/check-valid-register-info",
+  GET_OTP = "/auth/get-otp",
+  VERIFY_OTP = "/auth/verify-otp",
 }
 
 export enum ACCOUNT_URL {
@@ -53,4 +55,9 @@ export enum COMMENT_REPORT_URL {
 export enum FPT_AI_URL {
   IDENTIFY = "/vision/idr/vnm/",
   FACE_MATCH = "/dmp/checkface/v1",
+}
+
+export enum ROOM_URL {
+  BASE = "/rooms",
+  VIDEO_CALL = "/app/rooms/video-call",
 }

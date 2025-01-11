@@ -8,6 +8,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../redux/store";
 import { useEffect } from "react";
 import React from "react";
+import PublicLayoutProvider from "@/contexts/publicLayoutContext/PublicLayoutProvider";
+import Toast from "react-native-toast-message";
 
 export default function PublicLayout() {
   const router = useRouter();
@@ -22,14 +24,18 @@ export default function PublicLayout() {
   }, [isLogin]);
 
   return (
-    <Stack
-      screenOptions={{
-        presentation: "card",
-        animation: "slide_from_right",
-      }}
-    >
-      <Stack.Screen name="login" options={{ headerShown: false }} />
-      <Stack.Screen name="register" options={{ headerShown: false }} />
-    </Stack>
+    <PublicLayoutProvider>
+      <Stack
+        screenOptions={{
+          presentation: "card",
+          animation: "slide_from_right",
+        }}
+      >
+        <Stack.Screen name="login" options={{ headerShown: false }} />
+        <Stack.Screen name="register" options={{ headerShown: false }} />
+        <Stack.Screen name="verify-otp" options={{ headerShown: false }} />
+      </Stack>
+      <Toast />
+    </PublicLayoutProvider>
   );
 }

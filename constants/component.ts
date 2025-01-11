@@ -12,4 +12,8 @@ export namespace ComponentIntefaces {
     code: T;
     icon?: string;
   }
+
+  export interface IPublicLayout {
+    verifyPhoneNumber?: string;
+  }
 }

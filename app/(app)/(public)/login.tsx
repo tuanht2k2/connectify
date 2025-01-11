@@ -12,6 +12,7 @@ import { Link, useRouter } from "expo-router";
 import { useState } from "react";
 import React from "react";
 
+//@ts-ignore
 import loginBackground from "@/assets/images/login_bgr.png";
 import styles from "./style";
 import Toast from "react-native-toast-message";
@@ -22,10 +23,13 @@ import authService from "@/services/authService";
 
 import CommonService from "@/services/CommonService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import usePublicLayout from "@/contexts/publicLayoutContext/usePublicLayout";
 
 export default function LoginScreen() {
   const dispatch = useDispatch();
   const router = useRouter();
+
+  const { setPublicLayoutData } = usePublicLayout();
 
   const {
     control,
@@ -45,6 +49,22 @@ export default function LoginScreen() {
     );
   };
 
+  const loginFailed = () => {
+    CommonService.showToast(
+      "error",
+      "Đăng nhập thất bại",
+      "Sai tên đăng nhập hoặc mật khẩu"
+    );
+    setError("phoneNumber", {
+      type: "manual",
+      message: "Sai tên đăng nhập hoặc mật khẩu",
+    });
+    setError("password", {
+      type: "manual",
+      message: "Sai tên đăng nhập hoặc mật khẩu",
+    });
+  };
+
   const handleLogin = (request: any) => {
     setLoggingIn(true);
 
@@ -52,34 +72,26 @@ export default function LoginScreen() {
       .login(request)
       .then((res: any) => {
         const resData = res.data?.data;
-        const token = resData?.token;
-        if (token) {
+        if (!resData.authenticated) {
+          loginFailed();
+          return;
+        }
+        if (resData.otpAuthenticated && resData.token) {
+          const token = resData?.token;
           AsyncStorage.setItem("token", token);
+          setPublicLayoutData({});
           dispatch(login());
+          router.replace("/");
+          return;
+        } else {
+          setPublicLayoutData({ verifyPhoneNumber: request.phoneNumber });
+          router.push("/verify-otp");
+          return;
         }
       })
-      .then(() => {
-        CommonService.showToast(
-          "success",
-          "Đăng nhập thành công",
-          "Bạn sẽ được chuyển hướng"
-        );
-        router.replace("/");
-      })
-      .catch(() => {
-        CommonService.showToast(
-          "error",
-          "Đăng nhập thất bại",
-          "Sai tên đăng nhập hoặc mật khẩu"
-        );
-        setError("phoneNumber", {
-          type: "manual",
-          message: "Sai tên đăng nhập hoặc mật khẩu",
-        });
-        setError("password", {
-          type: "manual",
-          message: "Sai tên đăng nhập hoặc mật khẩu",
-        });
+      .catch((e) => {
+        console.log(e);
+        loginFailed();
       })
       .finally(() => {
         setLoggingIn(false);

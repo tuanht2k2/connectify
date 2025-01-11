@@ -1,13 +1,11 @@
 import { RequestInterfaces } from "@/data/interfaces/request";
 import { ApiInstance, getApiConfig } from "./axios";
 import { MESSAGE_URL } from "./url";
-import { database } from "@/firebaseConfig";
-import { ref } from "firebase/database";
 
 const messageService = {
-  getMessagesRef(messengerId: string) {
-    return ref(database, `messengers/${messengerId}/messages`);
-  },
+  // getMessagesRef(messengerId: string) {
+  //   return ref(database, `messengers/${messengerId}/messages`);
+  // },
   async create(request: RequestInterfaces.IEditMessageRequest) {
     const config = await getApiConfig();
 

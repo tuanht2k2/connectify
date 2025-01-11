@@ -11,8 +11,7 @@ import messageService from "@/services/messageService";
 import messengerService from "@/services/messengerService";
 import useSocket from "@/utils/useSocket";
 import { Icon } from "@rneui/themed";
-import { useLocalSearchParams } from "expo-router";
-import { onValue } from "firebase/database";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -41,6 +40,10 @@ function MessengerScreen() {
   const [messenger, setMessenger] =
     useState<ResponseInterfaces.IMessengerResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const navigateVideoCall = () => {
+    router.push(`/room/${id}`);
+  };
 
   const getData = (id: string) => {
     messengerService
@@ -222,6 +225,7 @@ function MessengerScreen() {
                       icon="videocam"
                       iconColor={color.primary}
                       size={30}
+                      onPress={navigateVideoCall}
                     />
                     <IconButtonComponent
                       icon="info"

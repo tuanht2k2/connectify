@@ -1,6 +1,11 @@
 import { StyleSheet } from "react-native";
+import color from "./color";
 
 const GlobalStyle = StyleSheet.create({
+  mainText: {
+    color: color.textMain,
+  },
+
   // padding
   xsPadding: {
     padding: 10,
@@ -31,6 +36,12 @@ const GlobalStyle = StyleSheet.create({
   center: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
+  },
+
+  horizontalFlex: {
+    display: "flex",
+    flexDirection: "row",
     alignItems: "center",
   },
 

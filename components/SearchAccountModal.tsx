@@ -56,6 +56,10 @@ function SearchAccountModalComponent(props: IProps) {
   ) => {
     setLoading(true);
     const res = await accountService.search(request);
+    if (!res) {
+      setLoading(false);
+      return;
+    }
     const accounts: Interfaces.IUser[] | null = res?.data?.data;
     if (accounts) setAccounts(accounts);
 

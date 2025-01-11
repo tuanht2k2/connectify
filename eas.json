@@ -1,5 +1,18 @@
 {
+  "cli": {
+    "appVersionSource": "remote"
+  },
   "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
+      "ios": {
+        "simulator": true
+      }
+    },
     "preview": {
       "android": {
         "buildType": "apk"
@@ -13,6 +26,8 @@
     "preview3": {
       "developmentClient": true
     },
-    "production": {}
+    "production": {
+      "autoIncrement": true
+    }
   }
 }

@@ -89,4 +89,11 @@ export namespace ResponseInterfaces {
   export interface INotificationResponse {
     message?: string;
   }
+
+  export interface IVerifyOtpResponse {
+    correct?: boolean;
+    remainResent?: number;
+    remainRetried?: number;
+    token?: string;
+  }
 }

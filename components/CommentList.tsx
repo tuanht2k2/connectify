@@ -20,7 +20,6 @@ import Toast from "react-native-toast-message";
 import { RequestInterfaces } from "@/data/interfaces/request";
 import commentService from "@/services/commentService";
 import { useRouter } from "expo-router";
-import { onValue } from "firebase/database";
 import CommentComponent from "./Comment";
 import { ResponseInterfaces } from "@/data/interfaces/response";
 import useSocket from "@/utils/useSocket";

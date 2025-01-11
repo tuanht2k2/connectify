@@ -31,6 +31,7 @@ export default function PrivateLayout() {
   useEffect(() => {
     AsyncStorage.getItem("token")
       .then((token) => {
+        console.log(token);
         if (!token) {
           handleLogout();
           return;

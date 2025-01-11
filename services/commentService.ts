@@ -1,15 +1,11 @@
 import { RequestInterfaces } from "@/data/interfaces/request";
 import { ApiInstance, getApiConfig } from "./axios";
 import { COMMENT_URL } from "./url";
-import { Client } from "@stomp/stompjs";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { database } from "@/firebaseConfig";
-import { ref } from "firebase/database";
 
 const commentService = {
-  getCommentsRef(postId: string) {
-    return ref(database, `posts/${postId}/comments`);
-  },
+  // getCommentsRef(postId: string) {
+  //   return ref(database, `posts/${postId}/comments`);
+  // },
   async create(request: RequestInterfaces.IEditCommentRequest) {
     const config = await getApiConfig();
 

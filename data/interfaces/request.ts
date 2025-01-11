@@ -105,4 +105,17 @@ export namespace RequestInterfaces {
     commentId?: string;
     reason?: string;
   }
+
+  export interface IEditDeviceRequest {
+    deviceId: string;
+  }
+
+  export interface IGetOtpRequest {
+    phoneNumber: string;
+  }
+
+  export interface IVerifyOtpRequest {
+    phoneNumber: string;
+    otp: string;
+  }
 }

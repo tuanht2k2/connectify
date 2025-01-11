@@ -16,6 +16,7 @@ import { Interfaces } from "@/data/interfaces/model";
 import { Link } from "expo-router";
 import { Button, Icon } from "@rneui/themed";
 
+//@ts-ignore
 import loginBackground from "@/assets/images/login_bgr.png";
 import styles from "./style";
 import GlobalStyle from "@/assets/styles/globalStyles";
@@ -27,6 +28,15 @@ import { RequestInterfaces } from "@/data/interfaces/request";
 import fptAiService from "@/services/fptAiService";
 import { Modal } from "react-native";
 import color from "@/assets/styles/color";
+// import RNTextDetector from "react-native-tesseract-ocr";
+
+interface OCRResult {
+  id?: string;
+  address?: string;
+  dob?: string;
+  name?: string;
+  sex?: string;
+}
 
 export default function RegisterScreen() {
   const dispatch = useDispatch();
@@ -289,12 +299,42 @@ export default function RegisterScreen() {
     );
   };
 
+  // const performOCR = async (uri: any) => {
+  //   try {
+  //     const data: any = await RNTextDetector.recognize(uri, "vie");
+
+  //     if (!data) {
+  //       CommonService.showToast(
+  //         "success",
+  //         "Thành công",
+  //         "Xác thực căn cước công dân thành công!"
+  //       );
+  //       return;
+  //     }
+  // console.log(data)
+  //     setValue("identificationNumber", data.id as string);
+  //     setValue("address", data.address as string);
+  //     setValue("dob", data.dob as string);
+  //     setValue("fullName", data.name as string);
+  //     setValue("gender", data.sex as string);
+  //     nextStep();
+  //   } catch (error) {
+  //     CommonService.showToast(
+  //       "error",
+  //       "Thất bại",
+  //       "Ảnh không hợp lệ, hãy chụp lại!"
+  //     );
+  //   }
+  // };
+
   const authenticationView = () => {
     const submitAuthenticationView = async (uri: string) => {
       setLoading(true);
       const images = await CommonService.uriListToFiles([uri]);
 
       const request: any = images[0];
+
+      // performOCR(images[0])
 
       fptAiService
         .identify(request)
@@ -304,6 +344,7 @@ export default function RegisterScreen() {
             "Thành công",
             "Xác thực căn cước công dân thành công!"
           );
+          showToast();
           const data = res?.data?.data?.[0];
           if (!data) return;
           setValue("identificationNumber", data.id);
@@ -466,6 +507,19 @@ export default function RegisterScreen() {
   const views = [basicView, securityView, authenticationView, confirmView];
   // const views = [authenticationView, confirmView];
   const CurrentView = views[step];
+
+  const showToast = () => {
+    const data = {
+      id: "042202004399",
+      name: "ĐINH CÔNG TUẤN",
+      dob: "26/10/2002",
+      sex: "NAM",
+      nationality: "VIỆT NAM",
+      address: "PHÚC TRẠCH, HƯƠNG KHÊ, HÀ TĨNH PHÚC TRẠCH, HƯƠNG KHÊ, HÀ TĨNH",
+      expiredDate: "26/10/2027",
+    };
+    console.log(data);
+  };
 
   return (
     <ImageBackground style={styles.container} source={loginBackground}>
